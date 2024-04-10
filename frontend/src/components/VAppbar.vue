@@ -82,7 +82,7 @@ function logout() {
         removeStore("at");
         removeStore("rt");
         dialog.close(id);
-        router.push({ path: "admin/login" });
+        router.push({ path: "/login" });
       }
     },
     cancel:{

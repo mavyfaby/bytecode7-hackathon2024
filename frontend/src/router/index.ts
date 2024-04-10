@@ -24,6 +24,16 @@ const routes: RouteRecordRaw[] = [
     component: () => import("../pages/PageSignup.vue"),
   },
   {
+    path: "/admin/login",
+    name: "AdminLogin",
+    component: () => import("../pages/admin/AdminLogin.vue"),
+  },
+  {
+    path: "/admin/:tab",
+    name: "Admin",
+    component: () => import("../pages/admin/AdminHome.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () => import("../pages/PageNotFound.vue"),

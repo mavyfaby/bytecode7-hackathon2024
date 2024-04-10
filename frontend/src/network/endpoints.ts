@@ -4,6 +4,8 @@
 enum Endpoints {
   applicant_login = "/applicant/login",
   applicant_register = "/applicant/register",
+  admin_login = "/admin/login",
+  applicants = "/admin/applicants",
 }
 
 

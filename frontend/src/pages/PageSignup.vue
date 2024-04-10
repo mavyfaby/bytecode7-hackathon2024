@@ -17,18 +17,28 @@
             <md-filled-text-field label="Last Name *" v-model.trim="lastName">
               <md-icon slot="leading-icon">person</md-icon>
             </md-filled-text-field>
-            <md-filled-text-field label="Email *" v-model.trim="email" type="email">
-              <md-icon slot="leading-icon">mail</md-icon>
-            </md-filled-text-field>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <md-filled-text-field label="Email *" v-model.trim="email" type="email">
+                <md-icon slot="leading-icon">mail</md-icon>
+              </md-filled-text-field>
+              <md-filled-text-field label="Phone *" v-model.trim="phone" type="tel">
+                <md-icon slot="leading-icon">phone</md-icon>
+              </md-filled-text-field>
+            </div>
+
             <md-filled-text-field label="Birthdate *" v-model.trim="birthdate" type="date">
               <md-icon slot="leading-icon">calendar_today</md-icon>
             </md-filled-text-field>
-            <md-filled-text-field label="Password *" v-model.trim="password" type="password">
-              <md-icon slot="leading-icon">key</md-icon>
-            </md-filled-text-field>
-            <md-filled-text-field label="Confirm Password *" v-model.trim="confirmPassword" type="password">
-              <md-icon slot="leading-icon">key</md-icon>
-            </md-filled-text-field>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <md-filled-text-field label="Password *" v-model.trim="password" type="password">
+                <md-icon slot="leading-icon">key</md-icon>
+              </md-filled-text-field>
+              <md-filled-text-field label="Confirm Password *" v-model.trim="confirmPassword" type="password">
+                <md-icon slot="leading-icon">key</md-icon>
+              </md-filled-text-field>
+            </div>
 
             <div class="flex justify-end">
               <md-filled-button @click="onStep2" :disabled="!canNext">Next</md-filled-button>
@@ -71,13 +81,14 @@ const firstName = ref("");
 const middleName = ref("");
 const lastName = ref("");
 const email = ref("");
+const phone = ref("");
 const birthdate = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const selectedFields = ref();
 
 const canNext = computed(() => {
-  return firstName.value && lastName.value && email.value && birthdate.value && password.value && confirmPassword.value;
+  return firstName.value && lastName.value && email.value && phone.value && birthdate.value && password.value && confirmPassword.value;
 });
 
 const items = ["Personal Info", "Job Info"];
@@ -127,6 +138,7 @@ function onRegister() {
     middle_name: middleName.value,
     last_name: lastName.value,
     email: email.value,
+    phone: phone.value,
     password: password.value,
     birthdate: birthdate.value,
     fields: fields

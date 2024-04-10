@@ -43,8 +43,8 @@
           </label>
         </div>
 
-        <div class="flex justify-end">
-          <md-filled-button @click="login" class="w-1/3" :disabled="isLoggingIn">
+        <div class="flex justify-end mt-5">
+          <md-filled-button @click="login" class="w-full" :disabled="isLoggingIn">
             {{ isLoggingIn ? 'Logging in...' : 'Login' }}
           </md-filled-button>
         </div>
@@ -82,12 +82,14 @@ function login() {
   }
 
   store.isLoading = true;
+  isLoggingIn.value = true;
 
   makeRequest("POST", Endpoints.applicant_login, {
     email: username.value,
     password: password.value,
   }, response => {
     store.isLoading = false;
+    isLoggingIn.value = false;
     
     if (response.success) {
       return;

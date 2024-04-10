@@ -38,6 +38,18 @@ declare global {
     date_stamp: string
   };
 
+  type ApplicantModel = {
+    id: number,
+    first_name: string,
+    middle_name?: string,
+    last_name: string,
+    email: string,
+    phone_number: string,
+    password?: string,
+    birthdate: string,
+    fields: number[],
+  };
+
   type TimelineData = {
     title: string,
     time: string,

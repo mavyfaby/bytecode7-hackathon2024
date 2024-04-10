@@ -26,10 +26,11 @@
 import { ref, watch }  from 'vue';
 import { useStore, useDialog } from './store';
 import { useRoute } from 'vue-router';
+import { getStore } from './utils/storage';
+
 import VAppbar from './components/VAppbar.vue';
 import VNavigationRail from './components/VNavigationRail.vue';
 import DialogMain from './components/dialogs/DialogMain.vue';
-import { getStore } from './utils/storage';
 
 const store = useStore();
 const route = useRoute();
@@ -40,11 +41,11 @@ const dialogs = ref();
 
 // Create rails
 const rails: Rail[] = [
-  
+  { id: "chats", icon: "chat", title: "Chats" }
 ];
 
 // If has tokens
-// store.isLoggedIn = !!getStore("at") && !!getStore("rt");
+store.isLoggedIn = !!getStore("at") && !!getStore("rt");
 // Set rails
 store.rails = rails;
 
