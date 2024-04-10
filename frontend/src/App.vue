@@ -29,6 +29,7 @@ import { useRoute } from 'vue-router';
 import VAppbar from './components/VAppbar.vue';
 import VNavigationRail from './components/VNavigationRail.vue';
 import DialogMain from './components/dialogs/DialogMain.vue';
+import { getStore } from './utils/storage';
 
 const store = useStore();
 const route = useRoute();
@@ -42,6 +43,8 @@ const rails: Rail[] = [
   
 ];
 
+// If has tokens
+// store.isLoggedIn = !!getStore("at") && !!getStore("rt");
 // Set rails
 store.rails = rails;
 

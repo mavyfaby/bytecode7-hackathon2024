@@ -31,6 +31,22 @@ declare global {
     dialogHide?: () => void;
   };
 
+  type AnnouncementModel = {
+    id: number,
+    title: string,
+    content: string,
+    date_stamp: string
+  };
+
+  type TimelineData = {
+    title: string,
+    time: string,
+    date: string,
+    content: string,
+    location?: string,
+    link?: string
+  }
+
   type DialogButton = {
     text: string,
     error?: boolean,

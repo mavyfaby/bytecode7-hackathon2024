@@ -9,7 +9,7 @@ export function setStore(key: string, value: string) {
  * Get value from localstorage
  */
 export function getStore(key: string) {
-  return localStorage.getItem(key) || "";
+  return localStorage.getItem(key);
 }
 
 /**

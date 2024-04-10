@@ -5,9 +5,12 @@ const useStore = defineStore("global", () => {
   const isDark = false;
   const selectedRail = "events";
   const rails: NavigationRailItem[] = [];
+  const isLoggedIn = true;
+  const isShowBackButton = false;
+  const user = {};
 
   return {
-    isLoading, isDark, rails, selectedRail
+    isLoading, isDark, rails, selectedRail, user, isLoggedIn, isShowBackButton
   }
 });
 

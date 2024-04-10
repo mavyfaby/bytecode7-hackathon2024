@@ -66,7 +66,7 @@ import { isEmail } from "~/utils/string";
 
 import VStepper from '~/components/VStepper.vue';
 
-const activeStep = ref(1);
+const activeStep = ref(0);
 const firstName = ref("");
 const middleName = ref("");
 const lastName = ref("");
@@ -97,12 +97,12 @@ const router = useRouter();
 
 function onStep2() {
   if (!isEmail(email.value)) {
-    toast.error("Invalid email address");
+    toast.info("Invalid email address");
     return;
   }
 
   if (password.value !== confirmPassword.value) {
-    toast.error("Passwords do not match");
+    toast.info("Passwords do not match");
     return;
   }
 
@@ -114,6 +114,12 @@ function onRegister() {
   const fields = Array.from(selectedFields.value.querySelectorAll("md-checkbox"))
     .filter((c: any) => c.checked)
     .map((c: any) => c.value);
+
+  // Check if no fields selected
+  if (fields.length === 0) {
+    toast.info("Please select at least one field");
+    return;
+  }
   
   // Construct data
   const data = {
