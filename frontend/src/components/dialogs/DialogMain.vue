@@ -11,9 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-import "@material/web/dialog/dialog";
-import "@material/web/button/text-button";
-
 const emit = defineEmits(["close"]);
 const props = defineProps<{
   data: DialogQueueItem

@@ -11,9 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-import "@material/web/icon/icon";
-import "@material/web/switch/switch";
-
 import { useStore } from "../store";
 import { setDarkMode } from "../utils/theme";
 

@@ -56,8 +56,6 @@
 </template>
 
 <script lang="ts" setup>
-import "@material/web/chips/assist-chip";
-
 withDefaults(defineProps<{
   headers: TableHeader[],
   data: any[],

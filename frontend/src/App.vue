@@ -30,8 +30,6 @@ import VAppbar from './components/VAppbar.vue';
 import VNavigationRail from './components/VNavigationRail.vue';
 import DialogMain from './components/dialogs/DialogMain.vue';
 
-import "@material/web/progress/linear-progress";
-
 const store = useStore();
 const route = useRoute();
 const dialog = useDialog();

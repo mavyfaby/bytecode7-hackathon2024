@@ -49,6 +49,13 @@
           </md-filled-button>
         </div>
 
+        <div class="flex items-center justify-center gap-2 mt-4">
+          <p class="text-sm">Don't have an account yet?</p>
+          <router-link to="/signup">
+            <md-text-button>Signup</md-text-button>
+          </router-link>
+        </div>
+
       </div>
     </div>
   </div>
@@ -59,12 +66,6 @@ import { ref } from 'vue';
 import { toast } from 'vue3-toastify';
 import { useStore } from '~/store';
 import { Endpoints, makeRequest } from '~/network/request';
-
-import "@material/web/textfield/outlined-text-field";
-import "@material/web/checkbox/checkbox";
-import "@material/web/button/filled-button";
-import "@material/web/icon/icon";
-import "@material/web/iconbutton/icon-button";
 
 const isRememberMe = ref(false);
 const isLoggingIn = ref(false);

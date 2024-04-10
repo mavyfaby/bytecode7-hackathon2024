@@ -22,9 +22,6 @@ import { useRouter } from 'vue-router';
 import { onMounted } from 'vue';
 import sal from 'sal.js';
 
-import "@material/web/button/filled-button";
-import "@material/web/button/filled-tonal-button";
-
 const router = useRouter();
 
 onMounted(sal);
