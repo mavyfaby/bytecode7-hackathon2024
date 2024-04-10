@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url(./theme/light.scss);
+@import url(./theme/dark.scss);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+:root, body {
+  scroll-behavior: smooth;
+}
+
+:root {
+  ::selection {
+    @apply bg-primary text-on-primary; 
+  }
+
+  --md-icon-font: 'Material Symbols Rounded';
+  --md-ref-typeface-plain: "Inter";
+  --md-checkbox-container-shape: 4px;
+  --md-ref-typeface-brand: sans-serif;
+  --md-badge-color: var(--md-sys-color-primary);
+  --md-badge-large-color: var(--md-sys-color-primary);
+  --md-badge-large-label-text-color: var(--md-sys-color-on-primary);
+  --md-filter-chip-elevated-container-shadow-color: var(--md-sys-color-outline);
+  --md-badge-large-label-text-weight: 500;
+  
+  @apply overflow-x-hidden h-full min-h-full;
+}
+
+html, body, #app {
+  @apply min-h-screen w-screen;
+}
+
+body {
+  --sal-duration: 500ms;
+  @apply bg-surface-container-high dark:bg-surface text-on-surface-variant;
+}
+
+*::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+*::-webkit-scrollbar-track {
+  @apply bg-surface-container;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-outline-variant dark:bg-surface-container-high;
+  border-radius: 20px;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.15s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+md-filled-button, md-text-button,
+md-outlined-button, md-filled-tonal-button,
+md-elevated-button {
+  --_label-text-font: Inter;
+  --_label-text-type: var(--md-text-button-label-text-type, var(--md-sys-typescale-label-large, 500 0.875rem / 1.25rem var(--md-ref-typeface-plain, 'Inter')));
+  
+  &.secondary {
+    --md-sys-color-primary: var(--md-sys-color-outline);
+  }
+}
+
+md-textfield-filled-button {
+  font-family: Inter;
+}
+
+.rounded {
+  --md-icon-font: 'Material Symbols Rounded';
+}
+
+md-icon[filled] {
+  font-variation-settings: 'FILL' 1;
+}
