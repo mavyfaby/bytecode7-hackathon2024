@@ -10,17 +10,37 @@ const prisma = new PrismaClient({
 export const job_listings = new Elysia().decorate('req', prisma)
 
 //get all 
-.get("/jobs", async ({req}) =>{
+.get("/jobs", async ({req, body} : {req:any , body: any}) =>{
 
+ 
     const query = await req.job_listing.findMany()
+
+
     const output = query !== null ? Response.json({success: true, message: 'Retrieved Job Listings successfully!', data: query}): 
                                     Response.json({success: false, message: 'No Jobs Listed', data:[]})
     return output
 })
+.get("/jobs/search", async ({req, body}: {req:any, body: any}) =>{
+    const searchQuery = body.search
 
+    const query = await req.job_listing.findMany({
+        where:{
+            OR:[
+                {title: {contains: searchQuery  }},
+            ]
+        }
+    })
+    if (query.length > 0) {
+        return Response.json({ success: true, message: 'Retrieved Job Listings successfully!', data: query });
+    } else {
+        return Response.json({ success: false, message: 'No Jobs Listed', data: [] });
+    }
+
+
+})
 //get specific by ID
 
-.get("/jobs/:id", async ({req, params}) =>{
+.get("/job/:id", async ({req, params}) =>{
 
     const query = await req.job_listing.findUnique({
         where: {id: Number(params.id)}
@@ -33,7 +53,7 @@ export const job_listings = new Elysia().decorate('req', prisma)
 })
 
 //create a new job_listing
-.post("/jobs/create", async ({req, body}: {req: any, body:any}) =>{
+.post("/job/create", async ({req, body}: {req: any, body:any}) =>{
     await req.job_listing.create({
         data: body as Job_listing
     })
@@ -44,7 +64,7 @@ export const job_listings = new Elysia().decorate('req', prisma)
 
 //update a job listing
 
-.put("/jobs/update/:id", async ({req, body, params} : {req:any, body: any, params: any}) =>{
+.put("/job/update/:id", async ({req, body, params} : {req:any, body: any, params: any}) =>{
     await req.job_listing.update({
         where: {id: Number(params.id)},
         data: body as Job_listing
@@ -54,7 +74,7 @@ export const job_listings = new Elysia().decorate('req', prisma)
 })
 
 //delete a job listing
-.delete("jobs/delete/:id", async ({req, params}) =>{
+.delete("/job/delete/:id", async ({req, params } : {req: any, params: any}) =>{
     await req.job_listing.delete({
         where: {id: Number(params.id)}
     })

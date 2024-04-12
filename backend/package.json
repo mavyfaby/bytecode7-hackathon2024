@@ -10,6 +10,7 @@
     "@elysiajs/jwt": "^1.0.2",
     "@prisma/client": "5.12.1",
     "elysia": "^1.0.13",
+    "jose": "^5.2.4",
     "prisma": "^5.12.1"
   },
   "devDependencies": {

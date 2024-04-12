@@ -1,7 +1,6 @@
-import Elysia from "elysia";
-import {cookie} from "@elysiajs/cookie"
-import {jwt} from "@elysiajs/jwt"
+import Elysia, { Cookie } from "elysia";
 import { PrismaClient } from "@prisma/client";
+import { createSessionToken } from "../utils/validation";
 
 
 
@@ -10,12 +9,24 @@ const prisma = new PrismaClient({
 })
 
 export const auth = new Elysia().decorate("req", prisma)
-.post("/login", async({req, body, set, jwt, setCookie} : {req:any, body: any, set:any, jwt:any, setCookie: any,}) => {
 
+.post("/login", async ({ body, req} : {body: any, req: any}) => {
+    
+      const user = await req.user.findUnique({
+        where: {
+          email: body.email, // Or username, depending on your login approach
+        },
+      });
+  
+      if (!user || !await Bun.password.verify(body.password, user.password)) {
+        return Response.json({ success: false, message: "Invalid credentials" });
+      }
+  
+      return Response.json({success: true, message: "Login me daddy", data: user})
+    
+     
+    
+  }).post("/logout", async ({req}) => {
 
-   const getEmail = await req.user.findUnique({
-    where: {email: String(req.user.email)}
-   })
-   
-
-})
+    return Response.json({success: true, message: 'logout me daddy'})
+  })

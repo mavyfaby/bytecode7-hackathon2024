@@ -5,24 +5,28 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model user {
-  id               Int       @id @default(autoincrement())
+  id               Int           @id @default(autoincrement())
   first_name       String
   middle_name      String?
   last_name        String
-  email            String    @unique
+  email            String        @unique
+  contact          String        @unique
   password         String
   birthdate        String
-  years_experience Int
-  datetime_created DateTime? @default(now())
+  years_experience String?
+  datetime_created DateTime?     @default(now())
+  application      application[]
 }
 
 model job_listing {
@@ -30,17 +34,54 @@ model job_listing {
   job_title        String
   address          String
   employment_type  EmploymentType?
-  level_expertise  LevelExpertise?
-  job_desc         String          @db.VarChar(255)
-  job_quali        String
-  job_responsb     String
-  benefits         String
+  penv             Penv?
+  job_desc         String          @db.VarChar(1000)
+  job_quali        String          @db.VarChar(1000)
+  job_responsb     String          @db.VarChar(1000)
+  benefits         String          @db.VarChar(1000)
   salary           Float
   datetime_created DateTime        @default(now())
+  application      application[]
 }
 
 model announcements {
-  id Int @id @default(autoincrement())
+  id               Int      @id @default(autoincrement())
+  title            String
+  description      String
+  date             String
+  time             String?
+  datetime_created DateTime @default(now())
+}
+
+model application {
+  id                           Int            @id @default(autoincrement())
+  job_listingId                Int
+  applicantId                  Int
+  status                       Status?
+  type_interview               TypeInterview?
+  job_applied                  job_listing    @relation(fields: [job_listingId], references: [id])
+  applicant                    user           @relation(fields: [applicantId], references: [id])
+  initial_done_date            String?
+  final_done_date              String?
+  initial_interview_date       String?
+  final_interview_date         String?
+  final_requirements_done_date String?
+  intial_stars                 Int?
+  final_stars                  Int?
+  intitial_message             String?        @db.VarChar(500)
+  final_message                String?        @db.VarChar(500)
+  datetime_created             DateTime       @default(now())
+
+  @@index([job_listingId])
+  @@index([applicantId])
+}
+
+model interviewer {
+  id               Int      @id @default(autoincrement())
+  username         String   @unique
+  password         String
+  rating           Float
+  datetime_created DateTime @default(now())
 }
 
 enum EmploymentType {
@@ -49,7 +90,24 @@ enum EmploymentType {
 }
 
 enum LevelExpertise {
-  BEGGINER
+  BEGINNER
   JUNIOR
   SENIOR
+}
+
+enum Penv {
+  ONSITE
+  WFH
+}
+
+enum Status {
+  PENDING
+  REJECTED
+  COMPLETED
+}
+
+enum TypeInterview {
+  INITIAL_INTERVIEW
+  FINAL_INTERVIEW
+  SUBMISSION_DOCUMENTS
 }
