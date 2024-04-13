@@ -6,10 +6,20 @@
     "dev": "bun run --watch src/index.ts"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/cookie": "^0.8.0",
+    "@elysiajs/jwt": "^1.0.2",
+    "@prisma/client": "5.12.1",
+    "elysia": "^1.0.13",
+    "jose": "^5.2.4",
+    "prisma": "^5.12.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "bun-types": "latest"
   },
-  "module": "src/index.js"
+  "module": "src/index.js",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
